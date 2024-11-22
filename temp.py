@@ -55,7 +55,7 @@ while True:
     except:
         sleep(0.1)    
     finally:
-        sleep(5)
+        sleep(30)
 
 
 
