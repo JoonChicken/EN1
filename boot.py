@@ -67,6 +67,26 @@ oled.fill(0)
 
 while True:
     try:
+        if not wlan.isconnected():
+            wlan.active(True)
+
+            # Try to connect to Tufts_Wireless:
+            ssid = "Tufts_Wireless"
+            print("Connecting to {}...".format(ssid))
+            oled.text("Connecting to", 0, 0)
+            oled.text(ssid, 0, 12)
+            oled.show()
+            wlan.connect(ssid)
+            while not wlan.isconnected():
+                sleep(1)
+                print('.')
+        
+        
+        client = MQTTClient(clientId, mqtt_server)
+        client.connect()
+        client.publish(clientId + "/ip", wlan.ifconfig()[0])
+                
+                
         # Take a measurement from the sensor
         oled.text("measuring...", 0, 0)
         oled.show()
@@ -122,6 +142,8 @@ while True:
         oled.show()
     finally:
         sleep(0.5)
+
+
 
 
 
