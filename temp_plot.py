@@ -3,8 +3,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 from datetime import datetime
 import time
+from mpl_toolkits.axes_grid1 import host_subplot
 
-file = open("data.csv", 'r')
+
+file = open("data_final1.csv", 'r')           # change to reflect your file
 data = csv.reader(file)
 discard = next(data)
 
@@ -18,10 +20,23 @@ for row in data:
     humidity.append(row[2])
 
 
-# plotting
+host = host_subplot(111)
+par = host.twinx()
+
+host.set_xlabel("Time")
+host.set_ylabel("Temperature")
+par.set_ylabel("Humidity")
+
+p1, = host.plot(timestamp, temperature, label="Temperature")
+p2, = par.plot(timestamp, humidity, label="Humidity")
+
+plt.show()
+
+"""
 plt.plot(timestamp, temperature)
 plt.plot(timestamp, humidity)
 plt.xlabel("Time")
-plt.ylabel("Temperature (ºC) / Humidity(%)")
+plt.ylabel("Temperature (ºF) / Humidity(%)")
 plt.title("Temperature and Humidity over time")
 plt.show()
+"""

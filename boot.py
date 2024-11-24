@@ -5,11 +5,10 @@ import network
 from umqttsimple import MQTTClient
 from s2pico_oled import OLED
 
-# DHT11 support is built in to MicroPython, just import the library:
+
 from dht import DHT11
 
-# Set up the sensor
-# We're using pin 23, but any digital pin will work
+
 inside = DHT11(Pin(38))
 
 wlan = network.WLAN(network.STA_IF)
@@ -42,11 +41,8 @@ oled.text("Connected! IP:", 0, 0)
 oled.text(str(wlan.ifconfig()[0]), 0, 12)
 oled.show()
 
-# Note that this server is only accessible from the Tufts network
-mqtt_server = "bell-iot.eecs.tufts.edu"
 
-# Some kind of unique identifier, esp32-[YOUR UTLN] is good
-# for example - esp32-ecarlson
+mqtt_server = "bell-iot.eecs.tufts.edu"
 clientId = "esp32-jheo"
 
 client = MQTTClient(clientId, mqtt_server)
