@@ -29,6 +29,7 @@ par.set_ylabel("Humidity")
 
 p1, = host.plot(timestamp, temperature, label="Temperature")
 p2, = par.plot(timestamp, humidity, label="Humidity")
+plt.legend(loc="upper left")
 
 plt.show()
 
